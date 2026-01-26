@@ -33,7 +33,6 @@ export default function SharePage() {
 
   return (
     <div className="max-w-6xl mx-auto h-full flex flex-col md:flex-row gap-6">
-      {/* Input Section */}
       <div className="md:w-1/3 flex flex-col gap-6">
         <header>
           <h2 className="text-4xl font-black uppercase text-white">Posts</h2>
@@ -70,7 +69,6 @@ export default function SharePage() {
         </GlassCard>
       </div>
 
-      {/* Feed Section */}
       <div className="flex-1 flex flex-col">
         <div className="label-mono text-white/20 mb-4 flex justify-between">
           <span>Active_Feed</span>
