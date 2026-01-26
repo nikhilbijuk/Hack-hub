@@ -1,4 +1,3 @@
-import React from 'react';
 import GlassCard from '../components/ui/GlassCard';
 
 const SCHEDULE = [
@@ -14,12 +13,12 @@ export default function EventsPage() {
         <h2 className="text-4xl font-black font-heading uppercase tracking-tighter leading-none text-white">
           Events
         </h2>
-        <div className="label-mono text-primary mt-2">event schedule</div>
+        <div className="label-mono text-primary mt-2 uppercase tracking-widest">event schedule</div>
       </header>
 
       <div className="space-y-4">
         {SCHEDULE.map((item, index) => (
-          <GlassCard key={index} className="p-6 flex gap-6 items-center">
+          <GlassCard key={index} className="p-6 flex gap-6 items-center border-white/5">
             <div className="text-primary font-mono font-bold whitespace-nowrap">
               {item.time}
             </div>
