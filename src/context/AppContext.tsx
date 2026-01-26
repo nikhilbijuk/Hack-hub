@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // 1. Initialize Supabase Client
 // Replace these with your actual credentials from Supabase Settings > API
-const supabaseUrl = 'YOUR_SUPABASE_URL';
-const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://nckgbfjicyfkblxghkjm.supabase.co';
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_z53KfnGS0t8bXwMXv0rHhQ_NsGpgKoU';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // 2. Updated Post Interface to support images
