@@ -24,7 +24,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const addPost = (newPost: Omit<Post, 'id' | 'timestamp'>) => {
     const post: Post = {
       ...newPost,
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 11),
       timestamp: Date.now(),
     };
     setPosts((prev) => [post, ...prev]);
