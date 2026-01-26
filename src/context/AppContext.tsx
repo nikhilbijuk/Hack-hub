@@ -1,5 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createClient } from '@supabase/supabase-js';
 
+// 1. Initialize Supabase Client
+// Replace these with your actual credentials from Supabase Settings > API
+const supabaseUrl = 'YOUR_SUPABASE_URL';
+const supabaseKey = 'YOUR_SUPABASE_ANON_KEY';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// 2. Updated Post Interface to support images
 export interface Post {
   id: string;
   content: string;
@@ -11,23 +19,35 @@ export interface Post {
 
 interface AppContextType {
   posts: Post[];
-  addPost: (post: Omit<Post, 'id' | 'timestamp'>) => void;
+  addPost: (post: Omit<Post, 'id' | 'timestamp'>) => Promise<void>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const INITIAL_POSTS: Post[] = [];
-
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [posts, setPosts] = useState<Post[]>(INITIAL_POSTS);
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  const addPost = (newPost: Omit<Post, 'id' | 'timestamp'>) => {
-    const post: Post = {
-      ...newPost,
-      id: Math.random().toString(36).substring(2, 11),
-      timestamp: Date.now(),
-    };
-    setPosts((prev) => [post, ...prev]);
+  // 3. Updated addPost function for Supabase Sync
+  const addPost = async (newPost: Omit<Post, 'id' | 'timestamp'>) => {
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([{ 
+        content: newPost.content,
+        type: newPost.type,
+        tag: newPost.tag,
+        imageUrl: newPost.imageUrl,
+        timestamp: Date.now() 
+      }])
+      .select();
+
+    if (error) {
+      console.error('Database Error:', error.message);
+      return;
+    }
+
+    if (data) {
+      setPosts((prev) => [data[0], ...prev]);
+    }
   };
 
   return (
