@@ -22,6 +22,8 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<Post[]>([]);
 
+  // ... existing code above ...
+
   // 2. Fetch posts from Supabase on mount
   useEffect(() => {
     const fetchPosts = async () => {
@@ -29,6 +31,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
         .from('posts')
         .select('*')
         .order('timestamp', { ascending: false });
+
+      // INSERT THE DEBUG LINES HERE 👇
+      console.log('SUPABASE DATA:', data);
+      console.log('SUPABASE ERROR:', error);
 
       if (error) {
         console.error('Error fetching:', error.message);
@@ -38,6 +44,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     };
     fetchPosts();
   }, []);
+
+// ... rest of the file ...
 
   // 3. Updated addPost function for Real Image Uploads
   const addPost = async (newPost: Omit<Post, 'id' | 'timestamp'>, file?: File) => {
