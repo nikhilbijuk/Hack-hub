@@ -37,10 +37,10 @@ const GlassCard: React.FC<GlassCardProps> = ({
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             {...props}
         >
-            {/* 2. Top Bar Logic (Label or Tag) */}
+            {/* 2. Top Bar Logic (Label or Tag) - Removed default SYSTEM_LOG */}
             <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
                 <span className="label-mono uppercase text-pink-500 text-[10px] tracking-widest">
-                    {tag || label || type || 'SYSTEM_LOG'}
+                    {tag || label || type}
                 </span>
                 <div className="flex gap-1">
                    <div className="w-1 h-1 bg-white/20 rounded-full" />
@@ -66,7 +66,7 @@ const GlassCard: React.FC<GlassCardProps> = ({
                     </p>
                 )}
 
-                {/* This allows you to still add extra buttons/elements from ExplorePage */}
+                {/* Allows extra elements (like the Like button) from ExplorePage */}
                 {children}
             </div>
 
