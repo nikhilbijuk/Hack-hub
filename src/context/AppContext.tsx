@@ -32,13 +32,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
         .select('*')
         .order('timestamp', { ascending: false });
 
-      // INSERT THE DEBUG LINES HERE 👇
       console.log('SUPABASE DATA:', data);
       console.log('SUPABASE ERROR:', error);
 
       if (error) {
         console.error('Error fetching:', error.message);
       } else if (data) {
+        // This log confirms the data is actually moving into your React state
+        console.log('SETTING POSTS STATE WITH:', data); 
         setPosts(data);
       }
     };
