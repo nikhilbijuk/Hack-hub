@@ -10,7 +10,9 @@ export default function App() {
     <AppProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard/posts" replace />} />
+          {/* Change 1: Redirect root path to explore instead of posts */}
+          <Route path="/" element={<Navigate to="/dashboard/explore" replace />} />
+          
           <Route
             path="/dashboard/*"
             element={
@@ -19,7 +21,9 @@ export default function App() {
                   <Route path="posts" element={<SharePage />} />
                   <Route path="events" element={<EventsPage />} />
                   <Route path="explore" element={<ExplorePage />} />
-                  <Route index element={<Navigate to="posts" replace />} />
+                  
+                  {/* Change 2: Redirect default dashboard path to explore */}
+                  <Route index element={<Navigate to="explore" replace />} />
                 </Routes>
               </DashboardLayout>
             }
